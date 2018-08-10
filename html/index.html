@@ -10,15 +10,18 @@
             const lngMin = parseFloat(lng) - 0.001;
             const lngMax = parseFloat(lng) + 0.001;
             const resultDiv = document.getElementById('results');
+            // use fetch api to get data
             fetch(window.location.href + `?by=boundingbox&latMin=${latMin}&latMax=${latMax}&lngMin=${lngMin}&lngMax=${lngMax}`)
                 .then( response => {
                     return response.json();
                 })
                 .then( data => {
+                    // iterate data and produce a <p> per entry containing name and address of the restaurant
                     let list = '';
                     data.forEach( restaurant => {
                         list += `<p style="margin-bottom: 2em;"><h3>${restaurant.name}</h3><h4>Address:</h4>${restaurant.address}</p>`;
                     });
+                    // write it all to the result-div
                     resultDiv.innerHTML = list;
                 })
                 .catch( error => {
