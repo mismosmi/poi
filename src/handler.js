@@ -1,4 +1,5 @@
 const data = require('../data/berlin.json');
+const read = require('./read');
 
 // export handler function
 module.exports = async ctx => {
@@ -21,5 +22,11 @@ module.exports = async ctx => {
           row.lng > ctx.query.lngMin &&
           row.lng < ctx.query.lngMax;
       } );
+    default:
+      try {
+        return ctx.body = await read('html/index.html');
+      } catch (e) {
+        ctx.throw(404, 'Page not found');
+      }
   }
 }
