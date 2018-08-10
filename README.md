@@ -1,6 +1,8 @@
 # poi
 A simple nodejs POI API.
 
+First run `npm install`.
+
 Run the server with `npm start`.
 
 Visit `localhost:3000`.
