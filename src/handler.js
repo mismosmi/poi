@@ -23,6 +23,7 @@ module.exports = async ctx => {
           row.lng < ctx.query.lngMax;
       } );
     default:
+      // serve index.html as a simple user interface
       try {
         return ctx.body = await read('html/index.html');
       } catch (e) {
