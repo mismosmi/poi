@@ -1,4 +1,39 @@
 <!DOCTYPE html>
 <html>
-    Hallo Welt
+    <head>
+    <script>
+        function findRestaurants() {
+            const lat = document.getElementById('lat').value;
+            const lng = document.getElementById('lng').value;
+            const latMin = parseFloat(lat) - 0.001;
+            const latMax = parseFloat(lat) + 0.001;
+            const lngMin = parseFloat(lng) - 0.001;
+            const lngMax = parseFloat(lng) + 0.001;
+            const resultDiv = document.getElementById('results');
+            fetch(window.location.href + `?by=boundingbox&latMin=${latMin}&latMax=${latMax}&lngMin=${lngMin}&lngMax=${lngMax}`)
+                .then( response => {
+                    return response.json();
+                })
+                .then( data => {
+                    let list = '';
+                    data.forEach( restaurant => {
+                        list += `<p style="margin-bottom: 2em;"><h3>${restaurant.name}</h3><h4>Address:</h4>${restaurant.address}</p>`;
+                    });
+                    resultDiv.innerHTML = list;
+                })
+                .catch( error => {
+                    resultDiv.textContent = error;
+                });
+        }
+    </script>
+    </head>
+    <body>
+        <h1>Find restaurants in your proximity in berlin</h1>
+        <h2>Your coordinates:</h2>
+        <p><label>Latitude</label><input type="text" id="lat" placeholder="Latitude" /></p>
+        <p><label>Longitude</label><input type="text" id="lng" placeholder="Longitude" /></p>
+        <p><button onclick="findRestaurants()">Find Restaurants</button></p>
+        <div id="results"></div>
+    </body>
+
 </html>
