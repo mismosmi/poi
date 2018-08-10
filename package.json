@@ -1,0 +1,13 @@
+{
+    "name": "pointofinterest",
+    "description": "A simple POI-API",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/mismosmi/poi.git"
+    },
+    "version": "0.0.1",
+    "license": "MIT",
+    "dependencies": {
+        "koa": "2.5.2"
+    }
+}
